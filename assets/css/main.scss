@@ -1,4 +1,5 @@
 ---
 ---
 
-@import "no-style-please";
+/* @import is being deprecated in favor of @use */
+@use "no-style-please";

@@ -1,94 +1,168 @@
-// -------------- THEME SWITCHER -------------- //
-@mixin dark-appearance {
-  filter: invert(1);
-  img {
-    filter: invert(1);
+/* Uncomment this code to use dark theme with invert(1) filter.
+https://github.com/riggraz/no-style-please/blob/master/README.md#dark-mode-for-images
 
-    &.ioda { filter: invert(0); }
-  }
+@mixin dark-appearance {
+	// Attempt to mimic dark appearance by invert colour of the background and all items of the page in "light theme".
+	// Note that extensions like Dark Reader and Chrome's built-in Auto Dark Mode may invert over this.
+	filter: invert(1);
+
+	// By default, the invert(1) setting above will also invert the colours of images; this inverts over the inverted images so that they don't look bad.
+	img, .footnote-backref { 
+		filter: invert(1);
+
+		// If the image is explicitly classified as "invert on dark appearance" `{:.ioda}`, let the invert(1) setting invert its colour.
+		&.ioda { 
+			filter: invert(0);
+		}
+	}
+}
+*/
+
+@mixin dark-appearance {
+	// Configure colour palette for dark theme
+	--text-color: white;
+	--bg-color: black;
+	--link-color: yellow;
+	--link-hover-color: white;
+	--highlight-color: blue;
+	--codeblock-bg-color: rgba(255, 255, 255, 0.1);
 }
 
-body[a="dark"] { @include dark-appearance; }
+:root {
+	// Configure colour palette for default/light theme
+	--text-color: black;
+	--bg-color: white;
+	--link-color: blue;
+	--link-hover-color: black;
+	--highlight-color: yellow;
+	--codeblock-bg-color: rgba(0, 0, 0, 0.05);
 
+	--content-width: 70rem;
+	--text-font: ui-sans-serif, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	--text-size: 1em;
+}
+
+/* Dark theme, if 'appearance' in _config.yml is either set to dark, or auto and visitor's system preferences prefer dark theme */
+body[a="dark"] {
+	@include dark-appearance;
+}
 
 @media (prefers-color-scheme: dark) {
-  body[a="auto"] { @include dark-appearance; }
+	body[a="auto"] {
+		@include dark-appearance;
+	}
 }
-// -------------------------------------------- //
 
-// bg color is also needed in html in order to
-// block body's background propagation
-// see: https://stackoverflow.com/a/61265706
-html, body { background: white; }
+/* Explicitly set html's background colour so that filter: invert() has something to work with. https://stackoverflow.com/a/61265706 */
+html, body {
+	background: var(--bg-color); // default: black
+}
 
-html { height: 100%; }
+html {
+	height: 100%;
+}
 
 body {
-  color: black;
-  font-family: monospace;
-  font-size: 16px;
-  line-height: 1.4;
-  margin: 0;
-  min-height: 100%;
-  overflow-wrap: break-word;
+	color: var(--text-color); // default: white
+	font-family: var(--text-font); // default: monospace
+	font-size: var(--text-size); // default: 16px
+	line-height: 1.5; // default: 1.4
+	margin: 0;
+	min-height: 100%;
+	overflow-wrap: break-word;
 }
 
-.post-meta { text-align: right; }
-
-h2, h3, h4, h5, h6 { margin-top: 3rem; }
-
-hr { margin: 2rem 0; }
-
-p { margin: 1rem 0; }
-
-li { margin: 0.4rem 0; }
-
-*:target { background: yellow; }
-
-.w {
-  max-width: 640px;
-  margin: 0 auto;
-  padding: 4rem 2rem;
+/* Right-aligning post metadata (i.e. publish date) */
+.post-meta {
+	text-align: right;
 }
 
+h2, h3, h4, h5, h6 {
+	margin-top: 3rem;
+}
+
+/* Change thematic break appearance */
 hr {
-  text-align: center;
-  border: 0;
-
-  &:before { content: '/////' }
-  &:after { content: attr(data-content) '/////' }
+	font-family: monospace;
+	margin: 2rem 0;
+	text-align: center;
+	border: 0;
+	&:before {
+		content: '/////'
+	}
+	&:after {
+		content: attr(data-content) '/////'
+	}
 }
 
-table { width: 100%; }
+p {
+	margin: 1rem 0;
+}
+
+a {
+	color: var(--link-color); // default: blue
+}
+
+a:hover {
+	color: var(--link-hover-color);
+}
+
+ul {
+	padding-left: 1.5rem;
+}
+
+li {
+	margin: 0.4rem 0;
+}
+
+/* Highlight a section heading if it is referenced from a href */
+*:target {
+	background: var(--highlight-color);
+}
+
+:not(code) > .w {
+	// div container for content
+	max-width: var(--content-width); // default: 640px;
+	margin: 0 auto;	// center the content div;
+	padding: 4rem .8rem; // default: 4rem 2rem
+}
+
+table {
+	width: 100%; // adjust table to fill content-width rather than overflow
+}
 
 table, th, td {
-  border: thin solid black;
-  border-collapse: collapse;
-  padding: 0.4rem;
+	border: thin solid var(--text-color); // too little border
+	border-collapse: collapse; // too much border
+	padding: 0.4rem;
 }
 
-code {
-  color: white;
-  background: black;
+:not(pre) > code {
+	background: var(--codeblock-bg-color);
 }
 
-div.highlighter-rouge code {
-  display: block;
-  overflow-x: auto;
-  white-space: pre-wrap;
-  padding: 1rem;
+pre {
+	background: var(--codeblock-bg-color);
+	overflow-x: auto; // enables horizontal scrolling for code that overflows the codeblock container
+	white-space: pre; // allow code in codeblocks to be scrollable on small screens. default: pre-wrap
+	padding: 1rem;
 }
 
 blockquote {
-  font-style: italic;
-  border: thin solid black;
-  padding: 1rem;
-
-  p { margin: 0; }
+	font-style: italic;
+	border: thin solid var(--text-color);
+	padding: 1rem;
+	p {
+		margin: 0; // overrides the default paragraph spacing as spacing is already added by the blockquote padding
+	}
 }
 
-img {
-  max-width: 100%;
-  display: block;
-  margin: 0 auto;
+img, video, iframe {
+	max-width: 100%; // ensures images do not exceed content-width
+	display: block;
+	margin: 0 auto;	// horizontally centers the images within their container
 }
+
+/* a.back_home_text {
+ 	text-decoration: none;
+} */

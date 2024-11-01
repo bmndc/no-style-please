@@ -1,1 +1,11 @@
-<a href="{{ "/" | relative_url }}">{{ site.theme_config.back_home_text }}</a>
+<nav>
+	<a class="back_home_text" href="{{ "/" | relative_url }}">{{ site.theme_config.back_home_text }}</a>
+	{%- if page.categories.size > 0 -%}
+  	{%- assign hierarchy = '/' -%}
+		&nbsp;&gt;&nbsp;
+  	{%- for category in page.categories -%}
+  		{%- assign hierarchy = hierarchy | append: category | append: '/' -%}
+  		<a href="{{ hierarchy | relative_url }}">{{ category }}</a>
+  	{%- endfor -%}
+  {%- endif -%}
+</nav>
