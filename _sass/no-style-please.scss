@@ -73,6 +73,19 @@ body {
 	overflow-wrap: break-word;
 }
 
+a.skip {
+	/* Place the Skip to main content link at the top left */
+	position: absolute;
+	top: 0;
+	left: 0;
+	/* Visually hide the link and show it when focused */
+	opacity: 0;
+
+	&:focus {
+		opacity: 1;
+	}
+}
+
 .post-meta {
 	// Right-aligning metadata for posts (i.e. publishing date)
 	text-align: right;
@@ -89,10 +102,11 @@ hr {
 	margin: 2rem 0;
 	text-align: center;
 	border: 0;
-	&:before {
+
+	&::before {
 		content: '/////'
 	}
-	&:after {
+	&::after {
 		content: attr(data-content) '/////'
 	}
 }
@@ -113,7 +127,7 @@ li {
 	margin: 0.4rem 0;
 }
 
-*:target {
+h1:target, h2:target, h3:target, h4:target, h5:target, h6:target {
 	// Highlight a section heading if it is referenced from a href
 	background: var(--highlight-color);
 }
@@ -153,6 +167,7 @@ blockquote {
 	font-style: italic;	// Visually differentiates between blockquotes and surrounding paragraphs;
 	border: thin solid var(--text-color);
 	padding: 1rem; // Add spacing between the content in blockquote and the surrounding border
+
 	p {
 		margin: 0; // Overriding the paragraph spacing above as spacing is already added
 	}
