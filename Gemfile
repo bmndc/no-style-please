@@ -3,10 +3,10 @@
 source "https://rubygems.org"
 
 gem "kramdown-parser-gfm"
-gem "webrick"
-gem "csv"
-gem "bigdecimal"
-gem "base64"
-gem "logger"
+gem "csv", :group => :development
+gem "base64", :group => :development
+gem "webrick", :group => :development
+gem "bigdecimal", :group => :development
+gem "logger", :group => :development
 
 gemspec
