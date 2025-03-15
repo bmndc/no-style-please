@@ -10,7 +10,7 @@
 
 	// By default, the invert(1) setting above will also invert the colours of images;
 	// this below setting re-invert inverted images so that they don't look weird
-	img, .footnote-backref { 
+	img, .footnote-backref, iframe {
 		filter: invert(1);
 
 		// If the image is explicitly classified as "invert on dark appearance" (class="ioda"):
@@ -71,19 +71,6 @@ body {
 	margin: 0;
 	min-height: 100%;
 	overflow-wrap: break-word;
-}
-
-a.skip {
-	/* Place the Skip to main content link at the top left */
-	position: absolute;
-	top: 0;
-	left: 0;
-	/* Visually hide the link and show it when focused */
-	opacity: 0;
-
-	&:focus {
-		opacity: 1;
-	}
 }
 
 .post-meta {
@@ -177,6 +164,19 @@ img {
 	max-width: 100%; // Images are restricted to content div container width;
 	display: block;
 	margin: 0 auto;	// Centre the images; need "display: block" above
+}
+
+a.skip {
+	/* Place the Skip to main content link at the top left */
+	position: absolute;
+	top: 0;
+	left: 0;
+	/* Visually hide the link and show it when focused */
+	opacity: 0;
+
+	&:focus {
+		opacity: 1;
+	}
 }
 
 ul.menu.bar {
