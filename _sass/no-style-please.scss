@@ -179,6 +179,24 @@ img {
 	margin: 0 auto;	// Centre the images; need "display: block" above
 }
 
-a.back_home_text {
-	text-decoration: none;
+ul.menu.bar {
+	padding-left: 0;
+
+	& > li {
+		display: inline;
+		list-style-type: none;
+		margin-right: 1rem;
+	}
+}
+
+ul.menu.list.single-item {
+	// Remove bullet points from lists with only one child item
+	list-style-type: none;
+	padding-left: 0;
+}
+
+.show-more {
+	// Stylise the Show more link
+	list-style-type: none;
+	text-align: right;
 }

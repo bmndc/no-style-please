@@ -15,10 +15,14 @@ theme: no-style-please # if you are using GitHub Pages, change it to remote_them
 
 theme_config:
   appearance: "auto" # can be "light", "dark" or "auto"
-  back_home_text: ".." # customize text for homepage link in post layout
+  back_home_text: "&larr; Back to main page" # customize text for homepage link in post layout
   date_format: "%Y-%m-%d" # customize how date is formatted
   always_show_header: false # show site header across all pages (suitable for blogs or sites with sections)
-  show_description: false # show blog description in home page
+  show_description: true # show blog description in home page
+
+# header_links:
+#  - title: "Home"
+#    url: "/"
 
 sass:
   style: :compressed
