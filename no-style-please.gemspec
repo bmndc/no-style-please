@@ -15,6 +15,4 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "jekyll"
   spec.add_runtime_dependency "jekyll-feed"
   spec.add_runtime_dependency "jekyll-seo-tag"
-
-  spec.required_ruby_version = '>= 3.4'
 end
